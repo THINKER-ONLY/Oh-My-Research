@@ -1,0 +1,2 @@
+claim_id,section,claim_text,claim_type,polarity,scope,conditions,qualifiers,numeric_value,unit,denominator,comparison_or_baseline,evidence_id,evidence_location,evidence_summary,support_status,citation_status,limitation_or_gap,action
+TEMPLATE-01,,Replace this instructional row before using the ledger.,proposal,neutral,,,,,,,,,,,not-applicable,not-required,,Create one row per substantive claim.

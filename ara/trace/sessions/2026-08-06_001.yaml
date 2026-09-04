@@ -1,0 +1,100 @@
+session:
+  id: "2026-08-06_001"
+  timestamp: "2026-08-06T19:01:47+08:00"
+  ended: "2026-08-06T19:01:47+08:00"
+  summary: "Archived the supplied corpus and delivered a validated evidence-grounded research-writing Skill V1 with bounded evaluation and ARA provenance."
+
+events_logged:
+  - type: question
+    id: N01
+    provenance: user
+    summary: "Build an open research capability whose first complete scope includes academic writing and the supplied research corpus."
+  - type: decision
+    id: N02
+    provenance: user
+    summary: "Execute the recommended portable Skill-first approach and defer Harness/MCP expansion."
+  - type: experiment
+    id: N04
+    provenance: ai-executed
+    summary: "Inventoried 9 PDFs and 583 links, attempted 80 document candidates, downloaded 70, and retained 10 explicit failures with hashes and provenance."
+  - type: decision
+    id: N06
+    provenance: ai-suggested
+    summary: "Keep the redistribution-restricted Phrasebank PDF local-only and publish only metadata, redaction markers, policy synthesis, and the official lawful link."
+  - type: experiment
+    id: N07
+    provenance: ai-executed
+    summary: "Captured four unassisted writing baselines under the unchanged evaluation cases."
+  - type: dead_end
+    id: N08
+    provenance: ai-executed
+    summary: "The fixed baseline compression changed association to causation and removed conclusion-changing limitations."
+  - type: decision
+    id: N09
+    provenance: ai-suggested
+    summary: "Put compression meaning preservation and causal-language red flags in the always-loaded Skill core."
+  - type: experiment
+    id: N10
+    provenance: ai-executed
+    summary: "Fresh blind forward runs scored 58/64 versus 37/64 descriptively and had 0/4 versus 2/4 critical failures on the fixed cases."
+  - type: experiment
+    id: N11
+    provenance: ai-executed
+    summary: "Ran 17 corpus tests, official Skill validation, corpus hash/path verification, ARA structural validation, and independent source/structure audits."
+
+ai_actions:
+  - action: "Moved the nine supplied PDFs into the local doc library and created four topic folders plus a source index."
+    provenance: ai-executed
+    files_changed: ["doc/source-index/inventory.json", "doc/source-index/sources.csv", "doc/source-index/downloads.csv", "doc/source-index/failures.csv"]
+  - action: "Implemented and tested the resumable, bounded, signature-validating corpus inventory/download tool."
+    provenance: ai-executed
+    files_changed: ["research-writing/scripts/corpus.py", "tests/test_corpus.py"]
+  - action: "Synthesized all nine original PDFs while preserving the restricted-source boundary."
+    provenance: ai-executed
+    files_changed: ["docs/corpus-synthesis.md"]
+  - action: "Created the portable research-writing Skill, four progressive-disclosure references, two reusable assets, and OpenAI metadata."
+    provenance: ai-executed
+    files_changed: ["research-writing/SKILL.md", "research-writing/agents/openai.yaml", "research-writing/references/", "research-writing/assets/"]
+  - action: "Ran RED baselines, blind forward tests, and an independent unchanged-rubric comparison."
+    provenance: ai-executed
+    files_changed: ["research-writing/evals/"]
+  - action: "Compiled and independently audited the Seal Level 1 ARA."
+    provenance: ai-executed
+    files_changed: ["ara/"]
+
+claims_touched:
+  - id: C01
+    action: created
+    provenance: ai-suggested
+  - id: C02
+    action: created
+    provenance: ai-suggested
+  - id: C03
+    action: created
+    provenance: ai-suggested
+  - id: C04
+    action: created
+    provenance: ai-suggested
+  - id: C05
+    action: created
+    provenance: ai-suggested
+  - id: C06
+    action: created
+    provenance: ai-suggested
+
+open_threads:
+  - "Broaden forward evaluation to real manuscripts, additional languages, disciplines, models, and independent raters before making general effectiveness claims."
+  - "Review licenses individually before versioning or redistributing any locally downloaded binary."
+  - "Revisit the 10 unresolved download records only through safe official/author sources and normal TLS verification."
+  - "Add a persistent Harness or MCP surface only when long-running state, multi-host access, or repeated corpus operations justify the coordination cost."
+
+ai_suggestions_pending:
+  - "Use the portable Skill as V1 and defer MCP/Harness work until concrete consumers require it."
+  - "Treat the evidence ledger and compression safety gate as the foundation for future research-writing evaluations."
+
+provenance_summary:
+  user_confirmed: 2
+  ai_suggested: 2
+  ai_executed: 5
+  user_revised: 0
+  confirmation_rate: 0.5

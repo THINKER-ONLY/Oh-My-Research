@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Writing"
+  short_description: "Evidence-grounded academic writing workflow"
+  default_prompt: "Use $research-writing to turn my research materials into a traceable paper draft."

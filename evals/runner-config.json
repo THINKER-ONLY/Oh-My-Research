@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "source": {
+    "runner_path": "tools/run_evals.py",
+    "config_path": "evals/runner-config.json",
+    "prompt_wrapper_path": "evals/prompt-wrapper.md",
+    "rubric_path": "evals/rubric.md",
+    "skill_source_dir": "skills/research-writing",
+    "skill_mount_dir": "research-writing",
+    "skill_files": [
+      "SKILL.md",
+      "agents/openai.yaml",
+      "assets/evidence-ledger.csv",
+      "assets/writing-brief.md",
+      "references/evidence-and-integrity.md",
+      "references/revision-and-style.md",
+      "references/section-guides.md",
+      "references/source-foundations.md",
+      "references/writing-workflow.md"
+    ],
+    "cases": [
+      {
+        "id": "01-outline",
+        "path": "evals/cases/01-outline.md"
+      },
+      {
+        "id": "02-revision",
+        "path": "evals/cases/02-revision.md"
+      },
+      {
+        "id": "03-integrity",
+        "path": "evals/cases/03-integrity.md"
+      },
+      {
+        "id": "04-compression",
+        "path": "evals/cases/04-compression.md"
+      },
+      {
+        "id": "05-source-foundations",
+        "path": "evals/cases/05-source-foundations.md"
+      },
+      {
+        "id": "06-genre-flexibility",
+        "path": "evals/cases/06-genre-flexibility.md"
+      },
+      {
+        "id": "07-proportional-edit",
+        "path": "evals/cases/07-proportional-edit.md"
+      }
+    ]
+  },
+  "codex": {
+    "executable": "C:\\Users\\31933\\.vscode\\extensions\\openai.chatgpt-26.803.61601-win32-x64\\bin\\windows-x86_64\\codex.exe",
+    "executable_length": 293478192,
+    "executable_sha256": "115518500b45188e410a15d3224c2bbc87df6f2209729bf327aaf7808ca9d5a6",
+    "expected_version": "codex-cli 0.147.0-alpha.6.5",
+    "model": "gpt-5.6-sol",
+    "model_provider": "custom",
+    "reasoning_effort": "medium",
+    "sandbox": "read-only",
+    "approval_policy": "never",
+    "case_timeout_seconds": 900,
+    "fixed_flags": [
+      "--strict-config",
+      "--ephemeral",
+      "--ignore-rules",
+      "--skip-git-repo-check",
+      "--json",
+      "-o",
+      "raw.md",
+      "-"
+    ],
+    "disabled_features": [
+      "apps",
+      "enable_mcp_apps",
+      "auth_elicitation",
+      "tool_call_mcp_elicitation",
+      "browser_use",
+      "browser_use_external",
+      "browser_use_full_cdp_access",
+      "in_app_browser",
+      "computer_use",
+      "hooks",
+      "image_generation",
+      "multi_agent",
+      "multi_agent_v2",
+      "plugins",
+      "remote_plugin",
+      "recommended_plugins",
+      "plugin_sharing",
+      "skill_search",
+      "skill_mcp_dependency_install",
+      "workspace_dependencies",
+      "standalone_web_search"
+    ],
+    "config_overrides": [
+      "model_provider=\"custom\"",
+      "model_reasoning_effort=\"medium\"",
+      "web_search=\"disabled\"",
+      "tools.web_search=false",
+      "mcp_servers={}",
+      "plugins={}",
+      "apps._default.enabled=false",
+      "project_doc_max_bytes=0",
+      "shell_environment_policy.inherit=\"none\""
+    ]
+  },
+  "audit": {
+    "root_entries": [
+      "research-writing",
+      "case.md",
+      "raw.md"
+    ],
+    "allowed_event_types": [
+      "thread.started",
+      "turn.started",
+      "item.started",
+      "item.updated",
+      "item.completed",
+      "turn.completed"
+    ],
+    "allowed_item_types": [
+      "reasoning",
+      "command_execution",
+      "agent_message"
+    ],
+    "forbidden_item_types": [
+      "file_change",
+      "mcp_tool_call",
+      "web_search",
+      "plan",
+      "tool_suggestion",
+      "browser",
+      "browser_use",
+      "computer",
+      "computer_use",
+      "image",
+      "image_generation",
+      "collaboration",
+      "subagent",
+      "agent_tool_call"
+    ]
+  }
+}

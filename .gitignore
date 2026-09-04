@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.tmp
+*.part
+
+# Downloaded/reference binaries are local research inputs until their licenses are reviewed.
+doc/writing/
+doc/research-methods/
+doc/agent-systems/
+doc/auto-research/
+
+# Supplied PDFs include material that is not redistributable.
+/*.pdf
+/doc/*.pdf
+
+# Generated allowlisted release artifacts.
+dist/
+*.zip

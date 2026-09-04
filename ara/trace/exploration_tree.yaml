@@ -1,0 +1,147 @@
+# Exploration Tree — Oh My Research V1
+# Research DAG reconstructed only from explicit project files and clearly marked inferred nodes.
+
+tree:
+  - id: N01
+    type: question
+    support_level: explicit
+    provenance: user
+    source_refs:
+      - "docs/superpowers/specs/2026-08-06-research-skill-design.md#Purpose"
+      - "docs/superpowers/plans/2026-08-06-research-writing-skill-v1.md#Goal"
+    title: "How can an open research skill make academic writing evidence-grounded and auditable?"
+    description: "The project asks for a reusable writing capability plus a traceable local source library without redistributing restricted material."
+    children:
+      - id: N02
+        type: decision
+        support_level: explicit
+        provenance: user
+        source_refs:
+          - "docs/superpowers/specs/2026-08-06-research-skill-design.md#Architecture"
+          - "docs/superpowers/specs/2026-08-06-research-skill-design.md#Deferred"
+        title: "Ship a portable Skill before a Harness or MCP service"
+        choice: "Implement V1 as one portable research-writing Skill with deterministic helper scripts."
+        alternatives:
+          - "Standalone long-running agent runtime"
+          - "Networked MCP server"
+        evidence: "The design explicitly includes the Skill and defers the other runtime/protocol layers."
+        children:
+          - id: N03
+            type: decision
+            support_level: inferred
+            provenance: ai-suggested
+            source_refs:
+              - "docs/superpowers/specs/2026-08-06-research-skill-design.md#Corpus Pipeline"
+              - "research-writing/SKILL.md#Workflow"
+            title: "Separate writing judgment from corpus mechanics"
+            choice: "Put claim and revision judgment in the Skill; put repeatable URL, download, hash, and manifest work in Python."
+            alternatives:
+              - "One long prompt containing both policy and mechanical operations"
+              - "Manual file collection without a deterministic manifest"
+            evidence: "The architecture and implementation plan assign distinct responsibilities to Skill and script."
+            children:
+              - id: N04
+                type: experiment
+                support_level: explicit
+                provenance: ai-executed
+                source_refs:
+                  - "doc/source-index/inventory.json"
+                  - "ara/evidence/tables/observed_corpus_inventory.md"
+                title: "Run the corpus inventory and download pipeline"
+                result: "The manifest records all current candidates and results, successful byte/hash metadata, blocked examples, and explicit failure statuses."
+                evidence: [C02, C06]
+                children:
+                  - id: N05
+                    type: dead_end
+                    support_level: inferred
+                    provenance: ai-suggested
+                    source_refs:
+                      - "doc/source-index/inventory.json#downloads"
+                      - "docs/corpus-synthesis.md#下载统计与仓库边界"
+                    title: "Some credible direct-document endpoints remain unavailable"
+                    hypothesis: "Every credible direct document candidate can be retrieved safely from its recorded canonical endpoint."
+                    failure_mode: "The final manifest retains HTTP, network/TLS, and non-PDF-signature failures rather than bypassing security checks or guessing mirrors."
+                    lesson: "The universal-retrieval hypothesis is reconstructed from the attempted corpus run, not stated as a prior project belief. Availability is time-bound; preserve the URL and exact failure reason, and do not disable TLS verification or silently substitute unknown mirrors."
+
+              - id: N06
+                type: decision
+                support_level: explicit
+                provenance: ai-suggested
+                source_refs:
+                  - "docs/corpus-synthesis.md#writing-wordspdf152-页"
+                  - "research-writing/scripts/corpus.py#RESTRICTED_LOCAL_FILENAMES"
+                  - "tests/test_corpus.py#test_extract_pdf_sources_redacts_restricted_context"
+                title: "Keep the restricted Phrasebank source local-only"
+                choice: "Retain metadata and a lawful official link while redacting context and excluding protected prose and binaries from the open artifact."
+                alternatives:
+                  - "Bundle the local PDF"
+                  - "Copy phrase lists into Skill references"
+                  - "Create a derived phrase corpus"
+                evidence: [C03]
+
+          - id: N07
+            type: experiment
+            support_level: explicit
+            provenance: ai-executed
+            source_refs:
+              - "research-writing/evals/baseline/01-outline.md"
+              - "research-writing/evals/baseline/02-revision.md"
+              - "research-writing/evals/baseline/03-integrity.md"
+              - "research-writing/evals/baseline/04-compression.md"
+            title: "Capture an unassisted writing baseline"
+            result: "The preserved baseline exposes targeted gaps while retaining positive controls for meaning preservation and refusal to fabricate citations."
+            evidence: [C04, C05]
+            children:
+              - id: N08
+                type: dead_end
+                support_level: explicit
+                provenance: ai-executed
+                source_refs:
+                  - "research-writing/evals/baseline/04-compression.md"
+                  - "research-writing/evals/comparison.md#Case-04-Compression-Without-Evidence-Drift"
+                title: "The fixed pressured baseline compression exhibits evidence drift"
+                hypothesis: "A concise unassisted rewrite will preserve association and conclusion-changing limitations."
+                failure_mode: "The baseline used causal wording and removed missing-control, significance-test, and replication limits."
+                lesson: "Freeze causal force and material limitations before cutting words."
+
+              - id: N09
+                type: decision
+                support_level: inferred
+                provenance: ai-suggested
+                source_refs:
+                  - "research-writing/evals/baseline/04-compression.md"
+                  - "research-writing/SKILL.md#Compression-safety-gate"
+                title: "Make compression preservation an explicit core gate"
+                choice: "Keep the compression safety sequence and red-flag verbs in the always-loaded Skill core."
+                alternatives:
+                  - "Leave compression behavior to generic style guidance"
+                  - "Load the gate only when the model detects a risky request"
+                evidence: "This is a reconstruction from the observed baseline failure and the implemented core gate, not a literal session log."
+                children:
+                  - id: N10
+                    type: experiment
+                    support_level: explicit
+                    provenance: ai-executed
+                    source_refs:
+                      - "research-writing/evals/forward/01-outline.md"
+                      - "research-writing/evals/forward/02-revision.md"
+                      - "research-writing/evals/forward/03-integrity.md"
+                      - "research-writing/evals/forward/04-compression.md"
+                      - "research-writing/evals/comparison.md"
+                    title: "Forward-test the Skill on the unchanged cases"
+                    result: "The comparison records improvements on every targeted baseline weakness and no forward critical failure, bounded to the fixture set."
+                    evidence: [C04, C05]
+
+          - id: N11
+            type: experiment
+            support_level: explicit
+            provenance: ai-executed
+            source_refs:
+              - "ara/evidence/tables/observed_validation_runs.md"
+              - "tests/test_corpus.py"
+              - "research-writing/SKILL.md"
+              - "doc/source-index/inventory.json"
+            title: "Run recorded unit, Skill, and corpus verification checks"
+            also_depends_on: [N04, N06, N10]
+            result: "All recorded validation commands completed successfully against the pre-ARA tracked tree anchored at commit f4ddb534adbfff99d1dbe8a041cffff08549bdaf."
+            evidence: [C01, C02, C03, C06]

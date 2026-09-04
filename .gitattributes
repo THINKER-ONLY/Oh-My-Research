@@ -1,0 +1,9 @@
+LICENSE text eol=lf
+THIRD_PARTY_NOTICES.md text eol=lf
+skills/research-writing/** text eol=lf
+ara/ export-ignore
+doc/ export-ignore
+docs/superpowers/ export-ignore
+evals/ export-ignore
+tests/ export-ignore
+tools/ export-ignore

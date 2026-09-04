@@ -1,0 +1,11 @@
+url,final_url,status,path,bytes,sha256,content_type,error
+https://joschu.net/docs/nuts-and-bolts.pdf,,network-error,,0,,,"HTTPSConnectionPool(host='joschu.net', port=443): Read timed out. (read timeout=15)"
+https://6.869.csail.mit.edu/fa18/lecture/howToDoResearch1.pdf,,network-error,,0,,,"HTTPSConnectionPool(host='6.869.csail.mit.edu', port=443): Max retries exceeded with url: /fa18/lecture/howToDoResearch1.pdf (Caused by SSLError(SSLCertVerificationError(1, ""[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for '6.869.csail.mit.edu'. (_ssl.c:1000)"")))"
+https://6.869.csail.mit.edu/sp21/lectures/L22/freeman.pdf,,network-error,,0,,,"HTTPSConnectionPool(host='6.869.csail.mit.edu', port=443): Max retries exceeded with url: /sp21/lectures/L22/freeman.pdf (Caused by SSLError(SSLCertVerificationError(1, ""[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for '6.869.csail.mit.edu'. (_ssl.c:1000)"")))"
+https://surgerysciencepubs.ucsf.edu/sites/default/files/umbraco/media/9538490/Resource-Guide-for-Scientific-Writing-and-More_Derish-2017.pdf,https://surgerysciencepubs.ucsf.edu/sites/default/files/umbraco/media/9538490/Resource-Guide-for-Scientific-Writing-and-More_Derish-2017.pdf,http-error,,0,,,HTTP 403
+https://www.darpa.mil/sites/default/files/attachment/2025-09/darpa-mto-spark-tank-mto-101.pdf,https://www.darpa.mil/sites/default/files/attachment/2025-09/darpa-mto-spark-tank-mto-101.pdf,http-error,,0,,,HTTP 403
+http://loria.fr/typographie/mathwriting.pdf,https://www.loria.fr/typographie/mathwriting.pdf,http-error,,0,,,HTTP 404
+http://cs.ucdavis.edu/~amenta/w10/writingman.pdf,https://cs.ucdavis.edu/~amenta/w10/writingman.pdf,http-error,,0,,,HTTP 404
+http://ucsd.edu/~swanson/papers/science-of-writing.pdf,https://ucsd.edu/~swanson/papers/science-of-writing.pdf,http-error,,0,,,HTTP 404
+http://mri.beckman.illinois.edu/resources/good_paper.pdf,http://mri.beckman.illinois.edu/resources/good_paper.pdf,http-error,,0,,,HTTP 502
+http://tex.loria.fr/typographie/mathwriting.pdf,https://mirror.gutenberg-asso.fr/tex.loria.fr/,rejected-signature,,2988,,text/html,

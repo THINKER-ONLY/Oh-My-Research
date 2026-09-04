@@ -1,0 +1,11 @@
+LICENSE
+THIRD_PARTY_NOTICES.md
+skills/research-writing/SKILL.md
+skills/research-writing/agents/openai.yaml
+skills/research-writing/assets/evidence-ledger.csv
+skills/research-writing/assets/writing-brief.md
+skills/research-writing/references/evidence-and-integrity.md
+skills/research-writing/references/revision-and-style.md
+skills/research-writing/references/section-guides.md
+skills/research-writing/references/source-foundations.md
+skills/research-writing/references/writing-workflow.md
