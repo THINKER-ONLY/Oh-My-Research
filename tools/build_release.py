@@ -53,6 +53,26 @@ def _absolute(path: Path) -> Path:
     return Path(os.path.abspath(os.fspath(path)))
 
 
+def _is_lexically_within(path: Path, root: Path) -> bool:
+    if path.is_relative_to(root):
+        return True
+
+    # Windows may spell the same existing prefix with an 8.3 alias (for
+    # example, RUNNER~1). Compare that prefix by identity without resolving
+    # the output's later symlinked components.
+    path_parts = path.parts
+    root_parts = root.parts
+    if len(path_parts) < len(root_parts):
+        return False
+    try:
+        candidate = Path(path_parts[0])
+        for part in path_parts[1 : len(root_parts)]:
+            candidate /= part
+        return candidate.samefile(root)
+    except (OSError, ValueError):
+        return False
+
+
 def _is_linklike(path: Path) -> bool:
     try:
         if path.is_symlink():
@@ -192,16 +212,20 @@ def _validate_output_path(output: Path, input_paths: list[Path]) -> Path:
     dist_absolute = root_absolute / "dist"
     resolved_dist = dist_absolute.resolve(strict=False)
 
-    is_lexically_in_root = output.is_relative_to(root_absolute)
+    is_lexically_in_root = _is_lexically_within(output, root_absolute)
     is_resolved_in_root = resolved_output.is_relative_to(resolved_root)
     if is_lexically_in_root:
-        current = root_absolute
-        for part in output.relative_to(root_absolute).parts:
-            current = current / part
+        current = Path(output.anchor)
+        for part in output.parts[1:]:
+            current /= part
             if _is_linklike(current):
+                try:
+                    relative = current.relative_to(root_absolute)
+                except ValueError:
+                    relative = current
                 raise ValueError(
                     "repository-local output has a symlink, junction, or "
-                    f"reparse-point ancestor: {current.relative_to(root_absolute).as_posix()}"
+                    f"reparse-point ancestor: {relative.as_posix()}"
                 )
     if is_lexically_in_root or is_resolved_in_root:
         if resolved_output == resolved_dist or not resolved_output.is_relative_to(resolved_dist):

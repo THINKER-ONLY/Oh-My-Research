@@ -318,6 +318,28 @@ class RepositoryLayoutTest(unittest.TestCase):
             shutil.copy2(TOOLS_DIR / name, repository / "tools" / name)
         return repository
 
+    def windows_short_path(self, path):
+        if os.name != "nt":
+            self.skipTest("8.3 path aliases are Windows-specific")
+        import ctypes
+        import ctypes.wintypes
+
+        get_short_path = ctypes.windll.kernel32.GetShortPathNameW
+        get_short_path.argtypes = [
+            ctypes.wintypes.LPCWSTR,
+            ctypes.wintypes.LPWSTR,
+            ctypes.wintypes.DWORD,
+        ]
+        get_short_path.restype = ctypes.wintypes.DWORD
+        buffer = ctypes.create_unicode_buffer(32768)
+        length = get_short_path(str(path), buffer, len(buffer))
+        if not length:
+            self.skipTest(f"8.3 short path unavailable for {path}")
+        short_path = Path(buffer.value)
+        if short_path == path:
+            self.skipTest(f"8.3 short path alias unavailable for {path}")
+        return short_path
+
     def run_repository_validator(self, repository):
         return subprocess.run(
             [sys.executable, str(repository / "tools" / "validate_repository.py")],
@@ -523,6 +545,9 @@ class RepositoryLayoutTest(unittest.TestCase):
     def test_release_builder_rejects_symlinked_repository_output_ancestor(self):
         with tempfile.TemporaryDirectory() as raw:
             repository = self.copy_release_repository(raw)
+            long_repository = Path(raw) / "repository-with-a-long-component"
+            repository.rename(long_repository)
+            repository = long_repository
             external_output = Path(raw) / "external-output"
             external_output.mkdir()
             try:
@@ -533,6 +558,8 @@ class RepositoryLayoutTest(unittest.TestCase):
             except (NotImplementedError, OSError) as exc:
                 self.skipTest(f"symlink creation is unavailable: {exc}")
             output = repository / "dist" / "release.zip"
+            if os.name == "nt":
+                output = self.windows_short_path(repository) / "dist" / "release.zip"
 
             result = self.run_release_builder(repository, output)
 
